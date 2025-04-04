@@ -1,0 +1,20 @@
+winograd
+winograd.exe
+
+.vscode/
+
+vtune_results/
+
+result_data/
+
+slurm-*
+
+nsys_results/
+
+*.json
+*.sqlite
+
+Optimize Info on Linux.md
+
+
+
