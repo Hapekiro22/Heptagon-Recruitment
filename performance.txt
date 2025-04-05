@@ -1,0 +1,38 @@
+Performance:
+Layer 0 :  Elapse time 292.193333 ms. (   37.31 GFlops) 
+Layer 1 :  Elapse time 667.232275 ms. (  348.53 GFlops) 
+Layer 2 :  Elapse time 234.653950 ms. (  486.63 GFlops) 
+Layer 3 :  Elapse time 332.575321 ms. (  686.70 GFlops) 
+Layer 4 :  Elapse time 117.807627 ms. (  934.36 GFlops) 
+Layer 5 :  Elapse time 167.034705 ms. ( 1317.99 GFlops) 
+Layer 6 :  Elapse time 165.692012 ms. ( 1328.67 GFlops) 
+Layer 7 :  Elapse time 165.882667 ms. ( 1327.15 GFlops) 
+Layer 8 :  Elapse time 60.894966 ms. ( 1676.21 GFlops) 
+Layer 9 :  Elapse time 87.406000 ms. ( 2335.60 GFlops) 
+Layer 10:  Elapse time 86.876313 ms. ( 2349.84 GFlops) 
+Layer 11:  Elapse time 86.568673 ms. ( 2358.19 GFlops) 
+Layer 12:  Elapse time 18.114010 ms. ( 2400.71 GFlops) 
+Layer 13:  Elapse time 17.361323 ms. ( 2504.79 GFlops) 
+Layer 14:  Elapse time 17.733971 ms. ( 2452.16 GFlops) 
+Layer 15:  Elapse time 17.309666 ms. ( 2512.27 GFlops) 
+Total elapse time: 2.535337. (  885.49 GFlops)
+
+Validation:
+Layer 0 : (Channel Height Weight Filter Batch) = (3   224 224 64  64 ) : Validation Passed !
+Layer 1 : (Channel Height Weight Filter Batch) = (64  224 224 64  64 ) : Validation Passed !
+Layer 2 : (Channel Height Weight Filter Batch) = (64  112 112 128 64 ) : Validation Passed !
+Layer 3 : (Channel Height Weight Filter Batch) = (128 112 112 128 64 ) : Validation Passed !
+Layer 4 : (Channel Height Weight Filter Batch) = (128 56  56  256 64 ) : Validation Passed !
+Layer 5 : (Channel Height Weight Filter Batch) = (256 56  56  256 64 ) : Validation Passed !
+Layer 6 : (Channel Height Weight Filter Batch) = (256 56  56  256 64 ) : Validation Passed !
+Layer 7 : (Channel Height Weight Filter Batch) = (256 56  56  256 64 ) : Validation Passed !
+Layer 8 : (Channel Height Weight Filter Batch) = (256 28  28  512 64 ) : Validation Passed !
+Layer 9 : (Channel Height Weight Filter Batch) = (512 28  28  512 64 ) : Validation Passed !
+Layer 10: (Channel Height Weight Filter Batch) = (512 28  28  512 64 ) : Validation Passed !
+Layer 11: (Channel Height Weight Filter Batch) = (512 28  28  512 64 ) : Validation Passed !
+Layer 12: (Channel Height Weight Filter Batch) = (512 14  14  512 64 ) : Validation Passed !
+Layer 13: (Channel Height Weight Filter Batch) = (512 14  14  512 64 ) : Validation Passed !
+Layer 14: (Channel Height Weight Filter Batch) = (512 14  14  512 64 ) : Validation Passed !
+Layer 15: (Channel Height Weight Filter Batch) = (512 14  14  512 64 ) : Validation Passed !
+
+
