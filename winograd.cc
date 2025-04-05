@@ -92,6 +92,8 @@ bool init_cublas() {
         }
     } 
 
+    cublasCreate(&cublas_handle);
+
     return true;
 }
 
@@ -173,9 +175,9 @@ void convert_float_to_half(float* src_f32, half* dst_f16, size_t size) {
 // 内存池全局变量
 static bool pool_initialized = false;
 
-static bool mem_pre_allocated = false;
+static bool mem_pre_allocated = true;
 
-const unsigned long long init_memsize = 4000000000; // 4GB
+const unsigned long long init_memsize = 2000000000; // 4GB
 
 // GPU内存
 static half *g_d_A = nullptr;
@@ -295,16 +297,22 @@ void warmup_cuda() {
                 &beta, d_C, small_size);
     }
     
-    
     cublasDestroy(temp_handle);
     cudaFree(d_A);
     cudaFree(d_B);
     cudaFree(d_C);
     cudaFree(d_dummy);
-    
+
     if (!pool_initialized) {
         init_cublas();
         pool_initialized = true;
+    }
+
+    if(mem_pre_allocated) {
+      bool memory_pre = 
+      ensure_memory_size((void**)&g_pinned_U, &g_pinned_U_size, init_memsize, true) &&
+      ensure_memory_size((void**)&g_pinned_V, &g_pinned_V_size, init_memsize, true) &&
+      ensure_memory_size((void**)&g_pinned_M, &g_pinned_M_size, init_memsize, true) ;
     }
     
     cudaDeviceSynchronize();
@@ -1433,7 +1441,7 @@ void sgemm(const int64_t M, const int64_t N, const int64_t K, float *A, float *B
   }
 }
 
-void winograd_convolution_single(float *__restrict__ image, const int image_height,
+void winograd_convolution(float *__restrict__ image, const int image_height,
   const int image_width, const int input_channel_num,
   float *__restrict__ filter, const int output_channel_num,
   const int batch_num, float *__restrict__ out) {
@@ -1524,15 +1532,10 @@ void winograd_convolution_single(float *__restrict__ image, const int image_heig
 
           init_cublas();
           pool_initialized = true;
+          cudaStreamCreate(&g_stream);
       
-    } 
+        } 
         
-        if (!pool_initialized) {
-            // 创建CUDA流
-            if (g_stream == NULL && cudaStreamCreate(&g_stream) != cudaSuccess) {
-                fprintf(stderr, "Failed to create CUDA stream\n");
-                return;
-            }
             
         
         // 确保所有内存大小足够
@@ -1608,7 +1611,7 @@ void winograd_convolution_single(float *__restrict__ image, const int image_heig
         free(packed_image);
         free(Y);
         
-    }
+    
     }
 
 }
@@ -1616,7 +1619,7 @@ void winograd_convolution_single(float *__restrict__ image, const int image_heig
 
 //------------------------------------------------Finished--------------------------------------------------//
 
-void winograd_convolution(float *__restrict__ image, const int image_height,
+void winograd_convolution_multi(float *__restrict__ image, const int image_height,
   const int image_width, const int input_channel_num,
   float *__restrict__ filter, const int output_channel_num,
   const int batch_num, float *__restrict__ out) {
